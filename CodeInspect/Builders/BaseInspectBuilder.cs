@@ -17,6 +17,8 @@ namespace CodeInspect.Builders
         protected Assembly[] _searchAssemblies;
         protected Type[] _searchTypes;
         protected string[] _searchNamespaces;
+        protected MemberInfo[] _specifiedMembers = new MemberInfo[0];
+
         protected bool _throwOnError;
 
         public BaseInspectBuilder()
@@ -55,7 +57,7 @@ namespace CodeInspect.Builders
             var result = _inspector.Run();
             if (!result.IsOk && _throwOnError)
             {
-                throw new MethodsValidationException(result);
+                throw new ItemsValidationException(result);
             }
 
             return result;

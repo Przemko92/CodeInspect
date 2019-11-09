@@ -4,11 +4,11 @@ using System.Text;
 
 namespace CodeInspect.Models.Exceptions
 {
-    public class FieldsValidationException : Exception
+    public class ItemsValidationException : Exception
     {
         private InspectionResult Result { get; }
 
-        public FieldsValidationException(InspectionResult result)
+        public ItemsValidationException(InspectionResult result)
         {
             this.Result = result;
         }

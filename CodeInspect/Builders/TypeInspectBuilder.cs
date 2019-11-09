@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using CodeInspect.Builders.Interfaces;
 using CodeInspect.Builders.Params;
@@ -17,7 +19,8 @@ namespace CodeInspect.Builders
     class TypeInspectBuilder : BaseInspectBuilder<ITypeInspectBuilder>, ITypeInspectBuilder
     {
         private IDictionary<Modifier, ITypeParam> _typesParams = new Dictionary<Modifier, ITypeParam>();
-        
+
+        public ITypeParam AllTypes => GetTypeParam(Modifier.All);
         public ITypeParam AllNotSpecified => GetTypeParam(Modifier.NotSet);
 
         public ITypeParam EnumTypes => GetTypeParam(Modifier.Enum);
@@ -38,9 +41,15 @@ namespace CodeInspect.Builders
             return _typesParams[modifier];
         }
 
+        public ITypeInspectBuilder ThisItems(IEnumerable<Type> types)
+        {
+            _specifiedMembers = types.ToArray();
+            return this;
+        }
+
         protected override void PrepareTest()
         {
-            _inspector = new TypesInspector(_typesParams, new TypesFinder(_searchAssemblies, _searchNamespaces, _searchTypes));
+            _inspector = new TypesInspector(_typesParams, new TypesFinder(_searchAssemblies, _searchNamespaces, _searchTypes, _specifiedMembers.Cast<TypeInfo>()));
         }
     }
 }

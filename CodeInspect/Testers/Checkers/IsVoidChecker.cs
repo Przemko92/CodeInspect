@@ -19,14 +19,14 @@ namespace CodeInspect.Testers.Checkers
 
             if (value && method.ReturnType.FullName != "System.Void")
             {
-                return InspectionItem.Create(false, $"Member {item.Name} in class {item.DeclaringType} is not void");
+                return InspectionItem.Create(item, false, $"Member {item.Name} in class {item.DeclaringType} is not void");
             }
-            else if (!value && method.ReturnType == null)
+            else if (!value && method.ReturnType.FullName == "System.Void")
             {
-                return InspectionItem.Create(false, $"Member {item.Name} in class {item.DeclaringType} is void");
+                return InspectionItem.Create(item, false, $"Member {item.Name} in class {item.DeclaringType} is void");
             }
 
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

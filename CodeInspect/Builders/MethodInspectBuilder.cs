@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using CodeInspect.Builders.Interfaces;
 using CodeInspect.Builders.Params;
@@ -16,6 +18,7 @@ namespace CodeInspect.Builders
     {
         private IDictionary<Modifier, IMethodParam> _methodsParams = new Dictionary<Modifier, IMethodParam>();
 
+        public IMethodParam AllMethods => GetMethodsParam(Modifier.All);
         public IMethodParam AllNotSpecified => GetMethodsParam(Modifier.NotSet);
 
         public IMethodParam PrivateMethods => GetMethodsParam(Modifier.Private);
@@ -38,6 +41,12 @@ namespace CodeInspect.Builders
             return _methodsParams[modifier];
         }
 
+        public IMethodsInspectBuilder ThisItems(IEnumerable<MethodInfo> methods)
+        {
+            _specifiedMembers = methods.ToArray();
+            return this;
+        }
+
         public MethodInspectBuilder()
         {
             
@@ -45,7 +54,7 @@ namespace CodeInspect.Builders
 
         protected override void PrepareTest()
         {
-            _inspector = new MethodsInspector(_methodsParams, new MethodsFinder(_searchAssemblies, _searchNamespaces, _searchTypes));
+            _inspector = new MethodsInspector(_methodsParams, new MethodsFinder(_searchAssemblies, _searchNamespaces, _searchTypes, _specifiedMembers.Cast<MethodInfo>()));
         }
     }
 }

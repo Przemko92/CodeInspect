@@ -14,6 +14,7 @@ namespace CodeInspect.Enums
         Abstract = 1 << 5,
         Interface = 1 << 6,
         Enum = 1 << 7,
-        Class = 1 << 8
+        Class = 1 << 8,
+        All = 1 << 15
     }
 }

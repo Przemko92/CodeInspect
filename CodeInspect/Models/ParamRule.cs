@@ -8,24 +8,13 @@ namespace CodeInspect.Models
 {
     class ParamRule : IReadOnlyCollection<KeyValuePair<RuleType, object>>
     {
+        public int Count => _rulesDictionary.Count;
         private IDictionary<RuleType, object> _rulesDictionary;
 
         public ParamRule()
         {
             _rulesDictionary = new Dictionary<RuleType, object>();
         }
-
-        public IEnumerator<KeyValuePair<RuleType, object>> GetEnumerator()
-        {
-            return _rulesDictionary.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public int Count => _rulesDictionary.Count;
 
         public void AddItem(RuleType ruleType, object arg)
         {
@@ -38,6 +27,16 @@ namespace CodeInspect.Models
             {
                 AddItem(item.Key, item.Value);
             }
+        }
+
+        public IEnumerator<KeyValuePair<RuleType, object>> GetEnumerator()
+        {
+            return _rulesDictionary.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace CodeInspect.Testers.Finders
 {
     class TypesFinder : BaseFinder<TypeInfo>
     {
-        public TypesFinder(Assembly[] assemblies, string[] namespaces, Type[] types) : base(assemblies, namespaces, types)
+        public TypesFinder(Assembly[] assemblies, string[] namespaces, Type[] types, IEnumerable<TypeInfo> specifiedMembers) : base(assemblies, namespaces, types, specifiedMembers)
         {
         }
 

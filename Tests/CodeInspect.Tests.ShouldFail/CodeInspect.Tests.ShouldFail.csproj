@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CodeInspect.TestProject\CodeInspect.TestProject.csproj" />
     <ProjectReference Include="..\..\CodeInspect\CodeInspect.csproj" />
+    <ProjectReference Include="..\..\TestProjects\CodeInspect.InValidProject\CodeInspect.InValidProject.csproj" />
   </ItemGroup>
 
 </Project>

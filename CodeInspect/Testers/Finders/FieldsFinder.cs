@@ -6,9 +6,10 @@ namespace CodeInspect.Testers.Finders
 {
     internal class FieldsFinder : BaseFinder<FieldInfo>
     {
-        public FieldsFinder(Assembly[] assemblies, string[] namespaces, Type[] types) : base(assemblies, namespaces, types)
+        public FieldsFinder(Assembly[] assemblies, string[] namespaces, Type[] types, IEnumerable<FieldInfo> specifiedMembers) : base(assemblies, namespaces, types, specifiedMembers)
         {
         }
+
 
         protected override IEnumerable<FieldInfo> GetMembers(Type type)
         {

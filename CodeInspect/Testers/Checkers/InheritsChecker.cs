@@ -17,11 +17,16 @@ namespace CodeInspect.Testers.Checkers
             var value = (Type)paramValue;
             var type = (TypeInfo)item;
 
+            if (type.IsInterface)
+            {
+                return InspectionItem.Create(item, true, $"Item {value.Name} is interface. Skipped");
+            }
+
             if (!value.IsAssignableFrom(type))
             {
-                return InspectionItem.Create(false, $"Type {item.Name} not inherits {value.Name}");
+                return InspectionItem.Create(item, false, $"Type {item.Name} not inherits {value.Name}");
             }
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

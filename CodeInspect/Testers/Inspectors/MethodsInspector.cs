@@ -41,7 +41,7 @@ namespace CodeInspect.Testers.Inspectors
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("FieldType");
+                    throw new ArgumentOutOfRangeException("Modifier");
                 }
 
                 if (method.IsStatic)
@@ -50,6 +50,9 @@ namespace CodeInspect.Testers.Inspectors
                 }
 
                 item = InspectUsingParam(method, GetParams(modifier));
+                result.Merge(item);
+
+                item = InspectUsingParam(method, GetParams(Modifier.All));
                 result.Merge(item);
             }
 

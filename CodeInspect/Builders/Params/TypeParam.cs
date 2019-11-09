@@ -14,6 +14,8 @@ namespace CodeInspect.Builders.Params
         protected Type _inherits;
         protected int? _maxAllowedMethods;
         protected int? _maxAllowedProperties;
+        protected bool? _hasPublicConstructor;
+        protected DefaultConstructorOptions _defaultConstructorOptions;
         public ITypeInspectBuilder And { get; }
 
         public TypeParam(ITypeInspectBuilder context) : base(context)
@@ -68,6 +70,18 @@ namespace CodeInspect.Builders.Params
             return this;
         }
 
+        public ITypeParam HasDefaultConstructor(bool incluePrivate = false)
+        {
+            _defaultConstructorOptions = new DefaultConstructorOptions(true, incluePrivate);
+            return this;
+        }
+
+        public ITypeParam HasPublicConstructor(bool value = true)
+        {
+            _hasPublicConstructor = value;
+            return this;
+        }
+
         public ParamRule Build()
         {
             var rule = new ParamRule();
@@ -78,6 +92,8 @@ namespace CodeInspect.Builders.Params
             if (_implementTypes.Any()) rule.AddItem(RuleType.Implements, _implementTypes);
             if (_maxAllowedMethods.HasValue) rule.AddItem(RuleType.MaxMethods, _maxAllowedMethods);
             if (_maxAllowedProperties.HasValue) rule.AddItem(RuleType.MaxProperties, _maxAllowedProperties);
+            if (_hasPublicConstructor != null) rule.AddItem(RuleType.HasPublicConstructor, _hasPublicConstructor);
+            if (_defaultConstructorOptions != null) rule.AddItem(RuleType.DefaultConstructor, _defaultConstructorOptions);
             rule.AddMany(((NameParam)_nameParam).Build());
             return rule;
         }

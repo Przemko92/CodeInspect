@@ -31,6 +31,10 @@ namespace CodeInspect.Enums
         ParamNameEndsWith,
         ParamNameNotEndsWith,
         NameEndsWith,
-        NameNotEndsWith
+        NameNotEndsWith,
+        HasGetter,
+        HasSetter,
+        HasPublicConstructor,
+        DefaultConstructor
     }
 }

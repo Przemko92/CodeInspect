@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using CodeInspect.Builders.Interfaces;
 using CodeInspect.Builders.Params;
@@ -14,6 +16,7 @@ namespace CodeInspect.Builders
     {
         private IDictionary<Modifier, IPropertyParam> _propertiesParams = new Dictionary<Modifier, IPropertyParam>();
 
+        public IPropertyParam AllProperties => GetPropertiesParam(Modifier.All);
         public IPropertyParam AllNotSpecified => GetPropertiesParam(Modifier.NotSet);
 
         public IPropertyParam PrivateProperties => GetPropertiesParam(Modifier.Private);
@@ -36,9 +39,15 @@ namespace CodeInspect.Builders
             return _propertiesParams[modifier];
         }
 
+        public IPropertiesInspectBuilder ThisItems(IEnumerable<PropertyInfo> properties)
+        {
+            _specifiedMembers = properties.ToArray();
+            return this;
+        }
+
         protected override void PrepareTest()
         {
-            _inspector = new PropertiesInspector(_propertiesParams, new PropertiesFinder(_searchAssemblies, _searchNamespaces, _searchTypes));
+            _inspector = new PropertiesInspector(_propertiesParams, new PropertiesFinder(_searchAssemblies, _searchNamespaces, _searchTypes, _specifiedMembers.Cast<PropertyInfo>()));
         }
     }
 }

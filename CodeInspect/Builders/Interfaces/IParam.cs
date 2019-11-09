@@ -40,6 +40,8 @@ namespace CodeInspect.Builders.Interfaces
         ITypeParam Inherits(Type type);
         ITypeParam HasNotMoreMethodsThan(int count);
         ITypeParam HasNotMorePropertiesThan(int count);
+        ITypeParam HasDefaultConstructor(bool incluePrivate = false);
+        ITypeParam HasPublicConstructor(bool value = true);
     }
 
     public interface IParam<T> : IParam

@@ -9,6 +9,7 @@ namespace CodeInspect.Builders.Interfaces
         T InAssemblies(params Assembly[] assemblies);
         T InTypes(params Type[] types);
         T InNamespaces(params string[] names);
+        T ThrowOnError();
     }
 
     public interface IInspectBuilder

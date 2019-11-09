@@ -30,7 +30,11 @@ namespace CodeInspect.Testers.Inspectors
 
         protected virtual T GetParams(Modifier modifier)
         {
-            if (_paramsToCheck.ContainsKey(modifier))
+            if (modifier == Modifier.All)
+            {
+                return _paramsToCheck.ContainsKey(Modifier.All) ? _paramsToCheck[Modifier.All] : null;
+            }
+            else if (_paramsToCheck.ContainsKey(modifier))
             {
                 return _paramsToCheck[modifier];
             }
@@ -45,7 +49,7 @@ namespace CodeInspect.Testers.Inspectors
             var inspectionResult = new InspectionResult();
             if (param == null)
             {
-                inspectionResult.AddResult(InspectionItem.Ok);
+                inspectionResult.AddResult(InspectionItem.Ok(member, "NotSetParam"));
                 return inspectionResult;
             }
 

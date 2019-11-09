@@ -1,4 +1,7 @@
-﻿namespace CodeInspect.Builders.Interfaces
+﻿using System.Collections.Generic;
+using System.Reflection;
+
+namespace CodeInspect.Builders.Interfaces
 {
     public interface IMethodsInspectBuilder : IInspectBuilder<IMethodsInspectBuilder>
     {
@@ -13,5 +16,7 @@
         IMethodParam StaticProtectedMethods { get; }
         IMethodParam StaticInternalMethods { get; }
         IMethodParam StaticPublicMethods { get; }
+        IMethodParam AllMethods { get; }
+        IMethodsInspectBuilder ThisItems(IEnumerable<MethodInfo> methods);
     }
 }

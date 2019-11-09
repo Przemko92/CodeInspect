@@ -23,9 +23,9 @@ namespace CodeInspect.Testers.Checkers
                     $"Wrong member name {item.Name} in class {item.DeclaringType}" :
                     $"Wrong member name {item.Name}";
 
-                return InspectionItem.Create(false, message);
+                return InspectionItem.Create(item, false, message);
             }
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

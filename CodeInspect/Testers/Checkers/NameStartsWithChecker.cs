@@ -19,9 +19,9 @@ namespace CodeInspect.Testers.Checkers
 
             if (!value.Any(x => item.Name.StartsWith(x)))
             {
-                return InspectionItem.Create(false, $"Wrong member name {item.Name} in class {item.DeclaringType}");
+                return InspectionItem.Create(item, false, $"Wrong member name {item.Name} in class {item.DeclaringType}");
             }
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

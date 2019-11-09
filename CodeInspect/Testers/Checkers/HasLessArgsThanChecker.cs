@@ -18,11 +18,11 @@ namespace CodeInspect.Testers.Checkers
             var method = (MethodInfo) item;
             if (method.GetParameters().Length > value)
             {
-                return InspectionItem.Create(false,
+                return InspectionItem.Create(item, false,
                     $"Too much args in method {method.Name} in class {item.DeclaringType}");
             }
 
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

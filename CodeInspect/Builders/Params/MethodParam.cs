@@ -82,7 +82,6 @@ namespace CodeInspect.Builders.Params
             return this;
         }
 
-
         public IMethodParam HasReturnType()
         {
             _areVoid = false;

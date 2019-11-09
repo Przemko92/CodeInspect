@@ -18,10 +18,10 @@ namespace CodeInspect.Testers.Checkers
 
             if (value && !char.IsLower(item.Name[0]))
             {
-                return InspectionItem.Create(false, $"Wrong member name {item.Name} in class {item.DeclaringType}");
+                return InspectionItem.Create(item, false, $"Wrong member name {item.Name} in class {item.DeclaringType}");
             }
 
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

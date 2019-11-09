@@ -6,7 +6,7 @@ namespace CodeInspect.Testers.Finders
 {
     class PropertiesFinder : BaseFinder<PropertyInfo>
     {
-        public PropertiesFinder(Assembly[] assemblies, string[] namespaces, Type[] types) : base(assemblies, namespaces, types)
+        public PropertiesFinder(Assembly[] assemblies, string[] namespaces, Type[] types, IEnumerable<PropertyInfo> specifiedMembers) : base(assemblies, namespaces, types, specifiedMembers)
         {
         }
 

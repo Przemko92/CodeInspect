@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CodeInspect.Builders.Interfaces;
+using CodeInspect.Enums;
 using CodeInspect.Models;
 
 namespace CodeInspect.Builders.Params
@@ -33,7 +35,14 @@ namespace CodeInspect.Builders.Params
 
         public ParamRule Build()
         {
-            throw new NotImplementedException();
+            var rule = new ParamRule();
+            if (_areForbidden.HasValue) rule.AddItem(RuleType.AreForbidden, _areForbidden);
+            if (_validAttributes.Any()) rule.AddItem(RuleType.ValidAttributes, _validAttributes);
+            if (_forbiddenAttributes.Any()) rule.AddItem(RuleType.InValidAttributes, _forbiddenAttributes);
+            if (_hasGetter != null) rule.AddItem(RuleType.HasGetter, _hasGetter);
+            if (_hasSetter != null) rule.AddItem(RuleType.HasSetter, _hasSetter);
+            rule.AddMany(((NameParam)_nameParam).Build());
+            return rule;
         }
     }
 }

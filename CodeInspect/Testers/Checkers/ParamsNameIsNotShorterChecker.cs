@@ -20,9 +20,9 @@ namespace CodeInspect.Testers.Checkers
 
             if (method.GetParameters().Any(x => x.Name.Length < value))
             {
-                return InspectionItem.Create(false, $"Too short argument name in {item.Name} in class {item.DeclaringType}");
+                return InspectionItem.Create(item, false, $"Too short argument name in {item.Name} in class {item.DeclaringType}");
             }
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

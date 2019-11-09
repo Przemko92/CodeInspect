@@ -19,10 +19,10 @@ namespace CodeInspect.Testers.Checkers
 
             if (item.CustomAttributes.Any(x => attributes.Contains(x.AttributeType)))
             {
-                return InspectionItem.Create(false, $"Member {item.Name} in class {item.DeclaringType} has all attributes {string.Join(", ", attributes.Select(x => x.Name))}");
+                return InspectionItem.Create(item, false, $"Member {item.Name} in class {item.DeclaringType} has all attributes {string.Join(", ", attributes.Select(x => x.Name))}");
             }
 
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

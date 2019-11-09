@@ -7,7 +7,7 @@ namespace CodeInspect.Testers.Finders
 {
     class MethodsFinder : BaseFinder<MethodInfo>
     {
-        public MethodsFinder(Assembly[] assemblies, string[] namespaces, Type[] types) : base(assemblies, namespaces, types)
+        public MethodsFinder(Assembly[] assemblies, string[] namespaces, Type[] types, IEnumerable<MethodInfo> specifiedMembers) : base(assemblies, namespaces, types, specifiedMembers)
         {
         }
 

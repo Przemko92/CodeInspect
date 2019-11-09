@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -8,38 +11,26 @@ namespace CodeInspect.Models
 {
     public class InspectionResult
     {
-        public bool IsOk => InValidItems.Count == 0;
-        public IList<InspectionItem> ValidItems { get; }
-        public IList<InspectionItem> InValidItems { get; }
+        public bool IsOk => Items.All(x => x.IsOk);
+        public IList<InspectionItem> Items { get; }
+        public IEnumerable<InspectionItem> InValidItems => Items.Where(x => !x.IsOk);
+        public IEnumerable<InspectionItem> ValidItems => Items.Where(x => x.IsOk);
 
         public InspectionResult()
         {
-            ValidItems = new List<InspectionItem>();
-            InValidItems = new List<InspectionItem>();
+            Items = new List<InspectionItem>();
         }
 
         internal void AddResult(InspectionItem item)
         {
-            if (item.IsOk)
-            {
-                ValidItems.Add(item);
-            }
-            else
-            {
-                InValidItems.Add(item);
-            }
+            Items.Add(item);
         }
 
         public void Merge(InspectionResult item)
         {
-            foreach (var validItem in item.ValidItems)
+            foreach (var validItem in item.Items)
             {
                 AddResult(validItem);
-            }
-
-            foreach (var inValidItem in item.InValidItems)
-            {
-                AddResult(inValidItem);
             }
         }
 
@@ -48,7 +39,7 @@ namespace CodeInspect.Models
             StringBuilder sb = new StringBuilder("Wrong items:");
             foreach (var inspectionItem in InValidItems)
             {
-                sb.AppendLine($"[{inspectionItem.Caller}] {inspectionItem.Message}");
+                sb.AppendLine($"[{inspectionItem.Caller}] [Member:{inspectionItem.Member.Name}] {inspectionItem.Message}");
             }
 
             return sb.ToString();
@@ -58,25 +49,26 @@ namespace CodeInspect.Models
     public class InspectionItem
     {
         public bool IsOk { get; }
+        public MemberInfo Member { get; }
         public string Message { get; }
         public string Caller { get; }
 
-        private InspectionItem(bool isOk, string message = null, string caller = null)
+        private InspectionItem(bool isOk, MemberInfo member, string message = null, string caller = null)
         {
             IsOk = isOk;
+            Member = member;
             Message = message;
             Caller = caller;
         }
 
-        public static InspectionItem Ok = new InspectionItem(true);
-
-        public static InspectionItem Create(bool isOk, string message = null, [CallerFilePath]string caller = null)
+        public static InspectionItem Ok(MemberInfo member, [CallerFilePath] string caller = null)
         {
-            if (isOk && string.IsNullOrEmpty(message))
-            {
-                return Ok;
-            }
-            return new InspectionItem(isOk, message, Path.GetFileNameWithoutExtension(caller));
+            return new InspectionItem(true, member, null, Path.GetFileNameWithoutExtension(caller));
+        }
+
+        public static InspectionItem Create(MemberInfo member, bool isOk, string message = null, [CallerFilePath]string caller = null)
+        {
+            return new InspectionItem(isOk, member, message, Path.GetFileNameWithoutExtension(caller));
         }
     }
 }

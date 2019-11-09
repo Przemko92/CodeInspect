@@ -21,9 +21,9 @@ namespace CodeInspect.Testers.Checkers
                     $"Forbidden item {item.Name} in class {item.DeclaringType}" :
                     $"Forbidden item {item.Name}";
 
-                return InspectionItem.Create(false, message);
+                return InspectionItem.Create(item, false, message);
             }
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

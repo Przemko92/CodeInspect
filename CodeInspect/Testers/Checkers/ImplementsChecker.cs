@@ -20,9 +20,9 @@ namespace CodeInspect.Testers.Checkers
 
             if (!value.Any(x => x.IsAssignableFrom(type)))
             {
-                return InspectionItem.Create(false, $"Type {item.Name} is not implements all interfaces: {string.Join(", ", value.Select(x => x.Name))}");
+                return InspectionItem.Create(item, false, $"Type {item.Name} is not implements all interfaces: {string.Join(", ", value.Select(x => x.Name))}");
             }
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using CodeInspect.Attributes;
 using CodeInspect.Testers.Interfaces;
 
 namespace CodeInspect.Testers.Finders
@@ -12,12 +14,14 @@ namespace CodeInspect.Testers.Finders
         private readonly Assembly[] _assemblies;
         private readonly string[] _namespaces;
         private readonly Type[] _types;
+        private readonly IEnumerable<T> _specifiedMembers;
 
-        public BaseFinder(Assembly[] assemblies, string[] namespaces, Type[] types)
+        public BaseFinder(Assembly[] assemblies, string[] namespaces, Type[] types, IEnumerable<T> specifiedMembers)
         {
             _assemblies = assemblies;
             _namespaces = namespaces;
             _types = types;
+            _specifiedMembers = specifiedMembers;
         }
 
         public IEnumerable<T> GetItems()
@@ -39,7 +43,12 @@ namespace CodeInspect.Testers.Finders
                 items = items.Concat(GetFromTypes());
             }
 
-            return items;
+            if (_specifiedMembers != null)
+            {
+                items = items.Concat(_specifiedMembers);
+            }
+
+            return items.Where(x => !x.CustomAttributes.Any(a => a.AttributeType.Equals(typeof(CodeInspectIgnoreAttribute)) || a.AttributeType.Equals(typeof(CompilerGeneratedAttribute))));
         }
 
         private IEnumerable<T> GetFromTypes()

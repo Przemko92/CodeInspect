@@ -42,16 +42,24 @@ namespace CodeInspect.Testers.Inspectors
                     item = InspectUsingParam(type, GetParams(Modifier.Class));
                     result.Merge(item);
                 }
-                if (type.IsAbstract && !type.IsInterface)
-                {
-                    foundRule = true;
-                    item = InspectUsingParam(type, GetParams(Modifier.Abstract));
-                    result.Merge(item);
-                }
+                
                 if (type.IsPublic)
                 {
                     foundRule = true;
                     item = InspectUsingParam(type, GetParams(Modifier.Public));
+                    result.Merge(item);
+                }
+                else 
+                {
+                    foundRule = true;
+                    item = InspectUsingParam(type, GetParams(Modifier.Internal));
+                    result.Merge(item);
+                }
+
+                if (type.IsAbstract && !type.IsInterface)
+                {
+                    foundRule = true;
+                    item = InspectUsingParam(type, GetParams(Modifier.Abstract));
                     result.Merge(item);
                 }
 
@@ -60,6 +68,9 @@ namespace CodeInspect.Testers.Inspectors
                     item = InspectUsingParam(type, GetParams(Modifier.NotSet));
                     result.Merge(item);
                 }
+
+                item = InspectUsingParam(type, GetParams(Modifier.All));
+                result.Merge(item);
             }
 
             return result;

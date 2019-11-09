@@ -17,9 +17,9 @@ namespace CodeInspect.Testers.Checkers
             var value = (int)paramValue;
             if (item.Name.Length > value)
             {
-                return InspectionItem.Create(false, $"Too long member name {item.Name} in class {item.DeclaringType}");
+                return InspectionItem.Create(item, false, $"Too long member name {item.Name} in class {item.DeclaringType}");
             }
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

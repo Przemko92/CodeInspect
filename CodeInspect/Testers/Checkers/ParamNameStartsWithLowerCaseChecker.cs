@@ -20,13 +20,13 @@ namespace CodeInspect.Testers.Checkers
 
             if (value && method.GetParameters().Any(x => !char.IsLower(x.Name[0])))
             {
-                return InspectionItem.Create(false, $"Wrong argument name in {item.Name} in class {item.DeclaringType}");
+                return InspectionItem.Create(item, false, $"Wrong argument name in {item.Name} in class {item.DeclaringType}");
             }
             else if (!value && method.GetParameters().Any(x => char.IsLower(x.Name[0])))
             {
-                return InspectionItem.Create(false, $"Wrong argument name in {item.Name} in class {item.DeclaringType}");
+                return InspectionItem.Create(item, false, $"Wrong argument name in {item.Name} in class {item.DeclaringType}");
             }
-            return InspectionItem.Ok;
+            return InspectionItem.Ok(item);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using CodeInspect.Builders.Interfaces;
 using CodeInspect.Builders.Params;
@@ -15,6 +17,7 @@ namespace CodeInspect.Builders
     {
         private IDictionary<Modifier, IFieldParam> _fieldsParams = new Dictionary<Modifier, IFieldParam>();
 
+        public IFieldParam AllFields => GetFieldsParam(Modifier.All);
         public IFieldParam AllNotSpecified => GetFieldsParam(Modifier.NotSet);
 
         public IFieldParam PrivateFields => GetFieldsParam(Modifier.Private);
@@ -37,6 +40,12 @@ namespace CodeInspect.Builders
             return _fieldsParams[modifier];
         }
 
+        public IFieldsInspectBuilder ThisItems(IEnumerable<FieldInfo> fields)
+        {
+            _specifiedMembers = fields.ToArray();
+            return this;
+        }
+
         public FieldsInspectBuilder()
         {
             
@@ -44,7 +53,7 @@ namespace CodeInspect.Builders
 
         protected override void PrepareTest()
         {
-            _inspector = new FieldsInspector(_fieldsParams, new FieldsFinder(_searchAssemblies, _searchNamespaces, _searchTypes));
+            _inspector = new FieldsInspector(_fieldsParams, new FieldsFinder(_searchAssemblies, _searchNamespaces, _searchTypes, _specifiedMembers.Cast<FieldInfo>()));
         }
     }
 }
