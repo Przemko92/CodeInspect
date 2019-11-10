@@ -11,6 +11,7 @@ These instructions will help you to attach this library to your project
 ### Installing
 
 Instalation with Nuget
+https://www.nuget.org/packages/CodeInspect
 
 ```
 Install-Package CodeInspect
