@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Helper attributes for CodeInspect library</Description>
+    <Version>0.1.0</Version>
+    <Copyright>Przemysław Grzywa 2019</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Przemko92/CodeInspect</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Przemko92/CodeInspect</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Code,inspect,Coding convention,Naming convention</PackageTags>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
 </Project>

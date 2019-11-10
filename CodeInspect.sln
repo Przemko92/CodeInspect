@@ -7,15 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeInspect", "CodeInspect\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5EF05B2A-DA9D-4DC2-8467-3BE5EA72702A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeInspect.Tests.ShouldPass", "Tests\CodeInspect.Tests.ShouldPass\CodeInspect.Tests.ShouldPass.csproj", "{15E09237-F00C-4372-B0F1-9EA0929E52C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeInspect.Tests.ShouldPass", "Tests\CodeInspect.Tests.ShouldPass\CodeInspect.Tests.ShouldPass.csproj", "{15E09237-F00C-4372-B0F1-9EA0929E52C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeInspect.ValidProject", "TestProjects\CodeInspect.ValidProject\CodeInspect.ValidProject.csproj", "{BD9B4FBC-C152-4E75-9EBD-5AE8641E3977}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeInspect.ValidProject", "TestProjects\CodeInspect.ValidProject\CodeInspect.ValidProject.csproj", "{BD9B4FBC-C152-4E75-9EBD-5AE8641E3977}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeInspect.Tests.ShouldFail", "Tests\CodeInspect.Tests.ShouldFail\CodeInspect.Tests.ShouldFail.csproj", "{0BBC0951-5F56-4A8C-A9A7-D70ADBE61AC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeInspect.Tests.ShouldFail", "Tests\CodeInspect.Tests.ShouldFail\CodeInspect.Tests.ShouldFail.csproj", "{0BBC0951-5F56-4A8C-A9A7-D70ADBE61AC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeInspect.InValidProject", "TestProjects\CodeInspect.InValidProject\CodeInspect.InValidProject.csproj", "{623A09E0-A71C-43FF-8406-18D05E549029}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeInspect.InValidProject", "TestProjects\CodeInspect.InValidProject\CodeInspect.InValidProject.csproj", "{623A09E0-A71C-43FF-8406-18D05E549029}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeInspect.Attributes", "CodeInspect.Attributes\CodeInspect.Attributes.csproj", "{45B6F9D2-3A1C-4683-AFEF-315490AFE961}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeInspect.Attributes", "CodeInspect.Attributes\CodeInspect.Attributes.csproj", "{45B6F9D2-3A1C-4683-AFEF-315490AFE961}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProjects", "TestProjects", "{6AC239C1-31A2-4EEB-8AF1-16E9AA334D63}"
 EndProject
