@@ -1,4 +1,4 @@
-# RapidCQRS
+# CodeInspect
 
 This is free .NET Standard 2.0 library for Code style inspection. You can use this library with .NET Core >= 2.0 and .NET Framework >= 4.61
 
